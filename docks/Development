@@ -1,0 +1,50 @@
+Development
+SDLC - Software Development Lifice Cycle
+-----------------
+
+GitHub CI/CD|1. Writing code
+GitLab CI/CD|2. Commit into SC (Git)
+Jenkins		|3. Testing
+TeamCity	|4. Build
+Azure ADOPS	|5. Deployment
+
+DevOps - is a philosofy or set of practicess to automate developmnet process.
+
+
+Plan
+DevOps Final Project 1
+-------------------------
+1. Create GIT repository final_project_1 - DONE
+2. Folder structure:  - DONE
+   	final_project_1
+   		README.md
+   		website
+   			README.md
+   			static_page
+   				index.html
+   				css
+   				images
+   			dynamic_page
+   				index.html
+   				css
+   				images
+   		cicd
+   			README.md
+   			jenkins
+   				jenkins_file
+   			iac
+   				README.md
+   				backend.tf
+3. Create Dev branch  - DONE
+4. Create HTML page for static_page, dynamic_page and commit.  - DONE
+5. Create Terraform code for Jenkins CI - in Progress
+	a) Create Architecture diagramm draw.io (see ozi project as example)
+	b) Update README.md
+	c) Create TF files
+6. Create jenkins_file for pipeline for static_page deployment
+7. Create jeknins_file for pipeline for dinamic_page deployment
+
+
+main -----------------------(-)-------------(-)-------
+		\---------------dev/---------------/---------
+
