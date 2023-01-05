@@ -9,6 +9,7 @@ resource "aws_security_group" "fp01_alb_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  # later add 443 port
   egress {
     from_port   = 0
     to_port     = 0
