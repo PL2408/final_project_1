@@ -1,6 +1,6 @@
 resource "aws_instance" "jenkins_server" {
-  ami                         = "ami-0a261c0e5f51090b1"
-  instance_type               = "t2.micro"
+  ami                         = data.aws_ami.amazon-linux-2.id
+  instance_type               = "t3.micro"
   key_name                    = "p_l"
   subnet_id                   = aws_subnet.fp01_pub_sb01.id
   vpc_security_group_ids      = [aws_security_group.jenkins_server.id]
@@ -11,7 +11,7 @@ resource "aws_instance" "jenkins_server" {
   iam_instance_profile        = aws_iam_instance_profile.ec2_profile.name
 
   root_block_device {
-    volume_type           = "gp2"
+    volume_type           = "gp3"
     volume_size           = 20
     delete_on_termination = true
   }
