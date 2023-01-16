@@ -10,7 +10,9 @@ wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenki
 
 #instal/start jenkins
 yum install jenkins -y
-jenkins service start
+systemctl enable jenkins
+systemctl start jenkins
+
 
 # swap file for ec2 (5GB)
 echo "------------------ Create SWAP File ----------------"
@@ -23,4 +25,4 @@ echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 echo "------------------ SWAP File Created ----------------"
 
 # custom ec2
-echo 'export PS1="\[\e[0;38;5;216m\]\u\[\e[0m\]@\[\e[0;38;5;39m\]jenkins-sever\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0;38;5;240m\]<\[\e[0;38;5;242m\]\t\[\e[0;38;5;241m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
+printf 'export PS1="\[\e[0;38;5;216m\]\u\[\e[0m\]@\[\e[0;38;5;39m\]jenkins-sever\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0;38;5;240m\]<\[\e[0;38;5;242m\]\t\[\e[0;38;5;241m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
