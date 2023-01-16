@@ -5,7 +5,7 @@ resource "aws_lb" "fp01_alb" {
   security_groups    = [aws_security_group.fp01_alb_sg.id]
   subnets            = [aws_subnet.fp01_pub_sb01.id, aws_subnet.fp01_pub_sb02.id]
 
-    tags = {
+  tags = {
     Name = "final_prj_01_vpc"
   }
 }
@@ -14,8 +14,8 @@ resource "aws_lb_listener" "fp01_alb" {
   load_balancer_arn = aws_lb.fp01_alb.arn
   port              = "777"
   protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+  ssl_policy        = "ELBSecurityPolicy-FS-1-2-2019-08"
+  certificate_arn   = aws_acm_certificate.cert.arn
 
   default_action {
     type             = "forward"
