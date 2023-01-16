@@ -3,7 +3,7 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = "DEV"
-      Project        = "Final project 01"
+      Project     = "Final project 01"
     }
   }
 }
