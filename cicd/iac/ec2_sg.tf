@@ -5,18 +5,21 @@ resource "aws_security_group" "jenkins_server" {
   vpc_id      = aws_vpc.fp01_vpc.id
 
   ingress {
+    description = "SSH traffic from my workstation"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["${chomp(data.http.myip.response_body)}/32"]
   }
   ingress {
+    description     = "HTTP traffic from ALB"
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
     security_groups = [aws_security_group.fp01_alb_sg.id]
   }
   egress {
+    description      = "Outbound traffic"
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
@@ -36,6 +39,7 @@ resource "aws_security_group" "jenkins_agent" {
   vpc_id      = aws_vpc.fp01_vpc.id
 
   ingress {
+    description = "SSH traffic from my workstation"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -49,6 +53,7 @@ resource "aws_security_group" "jenkins_agent" {
     security_groups = [aws_security_group.jenkins_server.id]
   }
   egress {
+    description      = "Outbound traffic"
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
@@ -81,7 +86,7 @@ resource "aws_security_group" "web_server_sg" {
     security_groups = [aws_security_group.jenkins_agent.id]
   }
   ingress {
-    description     = "HTTP traffic from ELB"
+    description     = "HTTP traffic from ALB"
     from_port       = 80
     to_port         = 80
     protocol        = "tcp"
