@@ -35,3 +35,5 @@ resource "aws_lb_listener" "fp01_web_alb" {
     target_group_arn = aws_lb_target_group.fp01_web_tg.arn
   }
 }
+
+
