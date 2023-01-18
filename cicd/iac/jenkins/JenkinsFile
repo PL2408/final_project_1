@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    triggers { pollSCM('* * * * *') }
+    stages {
+        stage('initialization') {
+            steps {
+                sh """
+                echo 'initialization'
+                sleep 5
+                """
+            }
+        }
+        stage('project build') {
+            steps {
+                sh """
+                echo 'project build!'
+                sleep 10
+                """
+            }
+        }
+        stage('copy') {
+            steps {
+                sh """
+                touch file.txt
+                cp file.txt file1.txt
+                """
+                // scp html_page
+            }
+        }
+        stage('delete files') {
+            steps {
+                echo "going to delete files in 10 sec..."
+                sh "sleep 10"
+                sh "rm -f file.txt file1.txt"
+            }
+        }
+    }
+}
