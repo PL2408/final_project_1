@@ -11,11 +11,11 @@ chown agent:agent /home/agent/jenkins
 mkdir /home/agent/.ssh
 chmod 700 /home/agent/.ssh
 
-#aws s3 cp s3://lopihara/ssh_keys/web.pk /home/agent/.ssh/web.pk
+aws s3 cp s3://lopihara/ssh_keys/web.pk /home/agent/.ssh/web.pk
 aws s3 cp s3://lopihara/ssh_keys/agent.pb /home/agent/.ssh/agent.pb
 mv /home/agent/.ssh/agent.pb /home/agent/.ssh/authorized_keys
 
-#chmod 400 /home/agent/.ssh/web.pk
+chmod 400 /home/agent/.ssh/web.pk
 chmod 600 /home/agent/.ssh/authorized_keys
 
 chown -R agent:agent /home/agent/.ssh
