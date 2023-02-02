@@ -20,4 +20,4 @@ chmod 600 /home/agent/.ssh/authorized_keys
 
 chown -R agent:agent /home/agent/.ssh
 
-printf 'export PS1="\[\e[0;38;5;227m\]\u\[\e[0m\]@\[\e[0;38;5;39m\]jenkins-agent\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0;38;5;240m\]<\[\e[0;38;5;242m\]\t\[\e[0;38;5;241m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
+printf 'export PS1="\[\e[0;38;5;39m\]ec2-user\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;229m\]jenkins-agent\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]<\[\e[0m\]\$?\[$((tput sgr0))\]\[\e[0m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc

@@ -29,4 +29,4 @@ systemctl enable jenkins
 systemctl start jenkins
 
 # custom PS1
-printf 'export PS1="\[\e[0;38;5;216m\]\u\[\e[0m\]@\[\e[0;38;5;39m\]jenkins-sever\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0;38;5;240m\]<\[\e[0;38;5;242m\]\t\[\e[0;38;5;241m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
+printf 'export PS1="\[\e[0;38;5;39m\]ec2-user\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;223m\]jenkins-server\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]<\[\e[0m\]\$?\[$(tput sgr0)\]\[\e[0m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
