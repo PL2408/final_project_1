@@ -1,2 +1,2 @@
-F /dynROM nginx:alpine
-COPYamic_page /usr/share/nginx/html
+FROM nginx:alpine
+COPY dynamic_page /usr/share/nginx/html
