@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                echo 'Hello World'
+                docker rmi -f $(docker images |grep -v nginx |awk 'NR>1 {print $3}'|uniq)
             }
         }
     }
