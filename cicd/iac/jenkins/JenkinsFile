@@ -12,7 +12,26 @@ pipeline {
         }
         stage('project build') {
             steps {
-                cd website/Docker/
+                sh """
+                echo 'project build!'
+                sleep 10
+                """
+            }
+        }
+        stage('copy') {
+            steps {
+                sh """
+                touch file.txt
+                cp file.txt file1.txt
+                """
+                // scp html_page
+            }
+        }
+        stage('delete files') {
+            steps {
+                echo "going to delete files in 10 sec..."
+                sh "sleep 10"
+                sh "rm -f file.txt file1.txt"
             }
         }
     }
