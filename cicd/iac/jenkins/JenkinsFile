@@ -1,35 +1,13 @@
 pipeline {
-    agent Node_1
-    triggers { pollSCM('* * * * *') }
+    agent any
+    options {
+        // Timeout counter starts AFTER agent is allocated
+        timeout(time: 1, unit: 'SECONDS')
+    }
     stages {
-        stage('initialization') {
+        stage('Example') {
             steps {
-                sh """
-                echo 'initialization'
-                sleep 5
-                """
-            }
-        }
-        stage('project build') {
-            steps {
-
-        cd website/Docker/
-
-        docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.${BUILD_NUMBER} .
-
-        docker login -u lopihara -p $DKR_TOKEN
-
-        docker push lopihara/dynamic-page:latest
-        docker push lopihara/dynamic-page:2.${BUILD_NUMBER}
-            }
-        }
-        stage('copy') {
-            steps {
-        ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker stop dynamic-page ||true
-
-        ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker pull lopihara/dynamic-page:latest
-
-        ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                echo 'Hello World'
             }
         }
     }
