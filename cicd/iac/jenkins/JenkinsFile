@@ -1,11 +1,16 @@
 pipeline {
     agent any
-    options {
-        // Timeout counter starts AFTER agent is allocated
-        timeout(time: 1, unit: 'SECONDS')
-    }
+    triggers { pollSCM('* * * * *') }
     stages {
-        stage('Example') {
+        stage('initialization') {
+            steps {
+                sh """
+                echo 'initialization'
+                sleep 5
+                """
+            }
+        }
+        stage('project build') {
             steps {
                 cd website/Docker/
             }
