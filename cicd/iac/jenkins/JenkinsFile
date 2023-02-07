@@ -5,7 +5,7 @@ pipeline {
         stage('build') {
             steps {
                 sh '''
-                    docker rmi -f $(docker images |grep -v nginx |awk 'NR>1 {print $3}'|uniq) ||true
+                    docker rmi -f $(docker images |grep -v nginx |awk 'NR>1 {print {$3}'|uniq) ||true
                     cd website/Docker/
                     docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.${BUILD_NUMBER} .
                     docker login -u lopihara -p $DKR_TOKEN
