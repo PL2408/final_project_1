@@ -2,33 +2,25 @@ pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
     stages {
-        stage('initialization') {
+        stage('build') {
             steps {
                 sh """
-                echo 'initialization'
-                sleep 5
+                    docker rmi -f $(docker images |grep -v nginx |awk 'NR>1 {print $3}'|uniq) ||true
+                    cd website/Docker/
+                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.${BUILD_NUMBER} .
+                    docker login -u lopihara -p $DKR_TOKEN
+                    docker push lopihara/dynamic-page:latest
+                    docker push lopihara/dynamic-page:2.${BUILD_NUMBER}
                 """
             }
         }
-        stage('project build') {
+        stage('after_build') {
             steps {
-                cd website/Docker/
-                docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.${BUILD_NUMBER} .
-                docker login -u lopihara -p $DKR_TOKEN
-                docker push lopihara/dynamic-page:latest
-                docker push lopihara/dynamic-page:2.${BUILD_NUMBER}
-            }
-        }
-        stage('sleep') {
-            steps {
-                sh "sleep 10"
-            }
-        }
-        stage('after build') {
-            steps {
-                ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker stop dynamic-page ||true
-                ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker pull lopihara/dynamic-page:latest
-                ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                sh """
+                    ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker stop dynamic-page ||true
+                    ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker pull lopihara/dynamic-page:latest
+                    ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                """
             }
         }
     }
