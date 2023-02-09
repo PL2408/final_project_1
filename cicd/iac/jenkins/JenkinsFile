@@ -27,7 +27,7 @@ pipeline {
                     docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:2.'${BUILD_NUMBER}'
                     sleep 5
                     curl -v http://localhost/ |grep 'Petro Lazarenko'
-                    docker stop dynamic-page ||true
+                    docker stop dynamic-page
                 """
             }
         }
@@ -48,6 +48,7 @@ pipeline {
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker stop dynamic-page ||true
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker pull lopihara/dynamic-page:latest
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                    ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true
                 '''
             }
         }
