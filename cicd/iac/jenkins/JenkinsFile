@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh """
                     docker stop dynamic-page ||true
-                    docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                    docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:2.'${BUILD_NUMBER}'
                     sleep 5
                     curl -v http://localhost/ |grep 'Petro Lazarenko'
                     docker stop dynamic-page ||true
