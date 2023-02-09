@@ -48,7 +48,7 @@ pipeline {
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker stop dynamic-page ||true
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker pull lopihara/dynamic-page:latest
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
-                    ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true
+                    ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
                 '''
             }
         }
