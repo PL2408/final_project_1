@@ -2,19 +2,48 @@ pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
     stages {
-        stage('build') {
+        stage('Code Validation') {
             steps {
-                sh '''
-                    docker rmi -f --privileged $(docker images |grep -v nginx |awk 'NR>1 {print $3}'|uniq) ||true
-                    cd website/Docker/
-                    docker build -t --privileged lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.${BUILD_NUMBER} .
-                    docker login -u lopihara -p $DKR_TOKEN
-                    docker push lopihara/dynamic-page:latest
-                    docker push lopihara/dynamic-page:2.${BUILD_NUMBER}
-                '''
+                sh """
+                    cd website/Docker/dynamic_page
+                    curl https://validator.w3.org/check -i -F output=json -F uploaded_file=@index.html > validation_result.html
+                    grep 'X-W3C-Validator-Status: Valid' validation_result.html ||echo \$?
+                """
             }
         }
-        stage('after_build') {
+        stage('Build Project') {
+            steps {
+                sh """
+                    docker rmi -f \$(docker images |grep -v nginx |awk 'NR>1 {print \$3}'|uniq) ||true
+                    ls -l
+                    cd website/Docker
+                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.'${BUILD_NUMBER}' .
+                """
+            }
+        }
+        stage('Project Validation') {
+            steps {
+                sh """
+                    docker stop dynamic-page ||true
+                    docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                    sleep 5
+                    curl -v http://localhost/ |grep 'Petro Lazarenko'
+                    docker stop dynamic-page ||true
+                """
+            }
+        }
+        stage('Publish Docker Image') {
+            steps {
+                withCredentials([string(credentialsId: 'docker_token', variable: 'DKR_TOKEN')]) {
+                    sh """
+                        docker login -u lopihara -p '${DKR_TOKEN}'
+                        docker push lopihara/dynamic-page:latest
+                        docker push lopihara/dynamic-page:2.'${BUILD_NUMBER}'
+                    """
+                }
+            }
+        }
+        stage('Deploy to PROD') {
             steps {
                 sh '''
                     ssh -i /home/agent/.ssh/web.pk web@10.70.55.157 docker stop dynamic-page ||true
