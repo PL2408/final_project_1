@@ -27,4 +27,27 @@ resource "aws_route53_record" "validation_cert" {
   zone_id         = data.aws_route53_zone.visitka_hz.zone_id
 }
 
+# private hosted zone
+resource "aws_route53_zone" "mp_priv_hz" {
+  name = "mp"
+  vpc {
+    vpc_id = aws_vpc.fp01_vpc.id
+  }
+}
 
+resource "aws_route53_record" "agent_dns" {
+  name    = "agent.mp"
+  zone_id = aws_route53_zone.mp_priv_hz.id
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.jenkins_agent.private_ip]
+}
+
+
+resource "aws_route53_record" "web_dns" {
+  name    = "web.mp"
+  zone_id = aws_route53_zone.mp_priv_hz.id
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.web_server.private_ip]
+}
