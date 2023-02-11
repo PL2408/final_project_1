@@ -16,7 +16,7 @@ pipeline {
                 sh """
                     docker rmi -f \$(docker images |grep -v nginx |awk 'NR>1 {print \$3}'|uniq) ||true
                     cd website/Docker
-                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:2.'${BUILD_NUMBER}' .
+                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:3.'${BUILD_NUMBER}' .
                 """
             }
         }
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh """
                     docker stop dynamic-page ||true
-                    docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:2.'${BUILD_NUMBER}'
+                    docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:3.'${BUILD_NUMBER}'
                     sleep 5
                     curl -v http://localhost/ |grep 'Petro Lazarenko'
                     docker stop dynamic-page
@@ -37,7 +37,7 @@ pipeline {
                     sh """
                         docker login -u lopihara -p '${DKR_TOKEN}'
                         docker push lopihara/dynamic-page:latest
-                        docker push lopihara/dynamic-page:2.'${BUILD_NUMBER}'
+                        docker push lopihara/dynamic-page:3.'${BUILD_NUMBER}'
                     """
                 }
             }
