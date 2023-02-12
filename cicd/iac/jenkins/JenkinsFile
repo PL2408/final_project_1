@@ -45,10 +45,10 @@ pipeline {
         stage('Deploy to PROD') {
             steps {
                 sh '''
-                    ssh -i /home/agent/.ssh/web.pk web@web.mp docker stop dynamic-page ||true
-                    ssh -i /home/agent/.ssh/web.pk web@web.mp docker pull lopihara/dynamic-page:latest
-                    ssh -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
-                    ssh -i /home/agent/.ssh/web.pk web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker stop dynamic-page ||true
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker pull lopihara/dynamic-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
                 '''
             }
         }
