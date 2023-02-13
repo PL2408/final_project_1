@@ -20,4 +20,5 @@ chmod 600 /home/agent/.ssh/authorized_keys
 
 chown -R agent:agent /home/agent/.ssh
 
+# shellcheck disable=SC2016
 printf 'export PS1="\[\e[0;38;5;38m\]\u\[\e[0m\]\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;229m\]jenkins_agent\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]<\[\e[0m\]\$?\[$(tput sgr0)\]\[\e[0m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
