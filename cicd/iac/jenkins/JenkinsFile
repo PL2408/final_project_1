@@ -1,12 +1,12 @@
 pipeline {
-    agent any
+    agent Node_1
 //     triggers { pollSCM('* * * * *') }
     stages {
         stage('Code Validation') {
             steps {
                 sh """
                     cd website/Docker/dynamic_page
-                    curl https://jsonformatter.curiousconcept.com/# -i -F output=json -F uploaded_file=@index.html > validation_result.html
+                    curl https://validator.w3.org/check -i -F output=json -F uploaded_file=@index.html > validation_result.html
                     grep 'X-W3C-Validator-Status: Valid' validation_result.html ||echo \$?
                 """
             }
