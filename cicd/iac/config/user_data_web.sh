@@ -35,7 +35,7 @@ docker run -p 80:80 -v /home/web/html:/usr/share/nginx/html:ro -d nginx
 
 # custom PS1
 # shellcheck disable=SC2016
-printf 'export PS1="\[\e[0;38;5;38m\]\u\[\e[0m\]\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;43m\]web_server\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]<\[\e[0m\]\$?\[$(tput sgr0)\]\[\e[0m\]>\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
+echo 'export PS1="\[\e[0;38;5;38m\]\u\[\e[0m\]\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;43m\]web_server\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
 
 
 
