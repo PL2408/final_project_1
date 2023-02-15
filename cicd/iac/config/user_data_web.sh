@@ -5,9 +5,14 @@ yum update -y
 
 # installation docker
 yum install docker git htop -y
+systemctl enable docker.service
 
 # create user web
 useradd -m -d /home/web -s /bin/bash web
+
+# add agent to group docker
+usermod -a -G docker web
+
 mkdir -p /home/web/.ssh
 
 # add web pb_k

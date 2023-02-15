@@ -1,13 +1,26 @@
 #!/bin/bash -xe
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
+#############################################
+# Install software
+#############################################
 yum update -y
-yum install java git -y
+yum install java git docker -y
 
+systemctl enable docker.service
+service docker start
+
+#############################################
+# Create user 'agent'
+#############################################
 useradd -m -d /home/agent -s /bin/bash agent
+# add agent to group docker
+usermod -a -G docker agent
+# create home directory for agent
 mkdir /home/agent/jenkins
 chown agent:agent /home/agent/jenkins
 
+# init .ssh authentication
 mkdir /home/agent/.ssh
 chmod 700 /home/agent/.ssh
 
@@ -20,5 +33,5 @@ chmod 600 /home/agent/.ssh/authorized_keys
 
 chown -R agent:agent /home/agent/.ssh
 
-# shellcheck disable=SC2016
+# set PS1
 echo 'export PS1="\[\e[0;38;5;38m\]\u\[\e[0m\]\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;229m\]jenkins_agent\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
