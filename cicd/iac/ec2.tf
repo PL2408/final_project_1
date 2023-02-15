@@ -13,10 +13,12 @@ resource "aws_instance" "jenkins_server" {
 
   root_block_device {
     volume_type           = "gp3"
-    volume_size           = 20
+    volume_size           = 15
     delete_on_termination = true
   }
-
+  lifecycle {
+    ignore_changes = [ami]
+  }
   tags = {
     Name = "jenkins_server"
   }
@@ -43,10 +45,12 @@ resource "aws_instance" "jenkins_agent" {
 
   root_block_device {
     volume_type           = "gp3"
-    volume_size           = 20
+    volume_size           = 8
     delete_on_termination = true
   }
-
+  lifecycle {
+    ignore_changes = [ami]
+  }
   tags = {
     Name = "jenkins_agent"
   }
@@ -71,8 +75,11 @@ resource "aws_instance" "web_server" {
 
   root_block_device {
     volume_type           = "gp3"
-    volume_size           = 20
+    volume_size           = 7
     delete_on_termination = true
+  }
+  lifecycle {
+    ignore_changes = [ami]
   }
 
   tags = {
