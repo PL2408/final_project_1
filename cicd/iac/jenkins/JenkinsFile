@@ -16,7 +16,7 @@ pipeline {
                 sh """
                     docker rmi -f \$(docker images |grep -v nginx |awk 'NR>1 {print \$3}'|uniq) ||true
                     cd website/Docker
-                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:3.'${BUILD_NUMBER}' .
+                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:4.'${BUILD_NUMBER}' .
                 """
             }
         }
