@@ -1,6 +1,6 @@
+def MJ_VERSION = "4"
 pipeline {
     agent { label 'Node_1' }
-    def MJ_VERSION = "4"
     stages {
         stage('Code Validation') {
             steps {
@@ -41,6 +41,7 @@ pipeline {
                     """
                 }
             }
+
         }
         stage('Deploy to PROD') {
             steps {
