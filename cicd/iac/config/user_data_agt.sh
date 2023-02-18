@@ -33,5 +33,7 @@ chmod 600 /home/agent/.ssh/authorized_keys
 
 chown -R agent:agent /home/agent/.ssh
 
-# set PS1
-echo 'export PS1="\[\e[0;38;5;38m\]\u\[\e[0m\]\[\e[0m\]@\[\e[0m\]\[\e[0;38;5;229m\]jenkins_agent\[\e[0m\][\[\e[0m\]\w\[\e[0m\]]\[\e[0m\]\[\e[0m\]:\[\e[0m\] "' >> /etc/bashrc
+# custom PS1
+aws s3 cp s3://lopihara/config/jenkins_agent_ps1.sh /etc/ps1.sh
+echo "" >> /etc/bashrc
+echo "source /etc/ps1.sh" >> /etc/bashrc

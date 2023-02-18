@@ -13,7 +13,7 @@ resource "aws_instance" "jenkins_server" {
 
   root_block_device {
     volume_type           = "gp3"
-    volume_size           = 15
+    volume_size           = 12
     delete_on_termination = true
   }
   lifecycle {
@@ -56,7 +56,7 @@ resource "aws_instance" "jenkins_agent" {
   }
 }
 
-output "jenkins_public_ip_01" {
+output "agent_public_ip" {
   value = aws_instance.jenkins_agent.public_ip
 }
 
@@ -75,7 +75,7 @@ resource "aws_instance" "web_server" {
 
   root_block_device {
     volume_type           = "gp3"
-    volume_size           = 7
+    volume_size           = 8
     delete_on_termination = true
   }
   lifecycle {
