@@ -28,8 +28,16 @@ resource "aws_iam_policy" "s3_read_policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Sid      = "S3Read"
-        Action   = ["s3:GetObject", "s3:GetObjectVersion"]
+        Effect : "Allow",
+        Action : [
+          "s3:ListAllMyBuckets",
+          "s3:ListBucket",
+          "s3:GetBucketLocation"
+        ],
+        Resource : "*"
+      },
+      {
+        Action   = ["s3:*"]
         Effect   = "Allow"
         Resource = ["arn:aws:s3:::lopihara/*"]
       },
