@@ -41,6 +41,26 @@ resource "aws_iam_policy" "s3_read_policy" {
         Effect   = "Allow"
         Resource = ["arn:aws:s3:::lopihara/*"]
       },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "route53:ChangeResourceRecordSets",
+          "route53:ChangeResourceRecordSets"
+        ],
+        "Resource" : [
+          "arn:aws:route53:::hostedzone/Z02078421SPA6MWP3QHES"
+        ]
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "ec2:DescribeInstanceAttribute",
+          "ec2:DescribeInstanceCreditSpecifications",
+          "ec2:DescribeInstanceStatus",
+          "ec2:DescribeInstances"
+        ],
+        "Resource" : "*"
+      }
     ]
   })
 }

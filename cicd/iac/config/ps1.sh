@@ -32,15 +32,19 @@ bakcyn='\e[46m'   # Cyan
 bakwht='\e[47m'   # White
 rst='\e[0m'    # Text Reset
 
-if [ "${HOSTNAME}" = "jenkins_server" ]; then
-   color=$cyn
-elif [ "${HOSTNAME}" = "jenkins_agent" ]; then
-   color=$ylw
-elif [ "${HOSTNAME}" = "web_server" ]; then
-   color=$grn
-else
-   color=$wht
-fi
+case "${HOSTNAME}" in
+    "jenkins_server")
+        color=$cyn
+        ;;
+    "jenkins_agent")
+        color=$ylw
+        ;;
+    "web_server")
+        color=$grn
+        ;;
+    *)
+        color=$wht
+esac
 
 if [ "`id -u`" -eq 0 ]; then
     PS1="\[$cyn\]┌\[$rst\][ \[$bldred\]\u\[$rst\]\[$grn\]@\[$color\]${HOSTNAME}\[$rst\] ] [ \[$cyn\]\t\[$rst\] ] [\[$bldylw\]\w\[$rst\]]\n\[$cyn\]└>\[$rst\] "

@@ -1,0 +1,18 @@
+{
+  "Comment": "Update the A record for .lopihara.iplatinum.pro",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "HOSTNAME.lopihara.iplatinum.pro",
+        "Type": "A",
+        "TTL": 60,
+        "ResourceRecords": [
+          {
+            "Value": "NEW_IP_ADDRESS"
+          }
+        ]
+      }
+    }
+  ]
+}

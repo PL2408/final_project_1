@@ -1,9 +1,16 @@
 #!/bin/bash -xe
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
-# update DNS name with new public IP
-# shellcheck disable=SC2034
-pub_ip=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+# Update Route53 record with new public IP
+aws s3 cp s3://lopihara/config/update_route53.json /opt/
+aws s3 cp s3://lopihara/config/update_route53.sh /opt/
+chmod +x /opt/update_route53.sh
+sed -i 's/HOSTNAME/web/g' /opt/update_route53.json
+/opt/update_route53.sh
+
+# Create crontab job to update record on restart
+cronjob="@reboot /opt/update_route53.sh"
+cat <(echo "$cronjob") | crontab -
 
 yum update -y
 
