@@ -1,5 +1,18 @@
 provider "aws" {
   region = "eu-central-1"
+
+  default_tags {
+    tags = {
+      Environment = "DEV"
+      Project     = "Final project 01"
+    }
+  }
+}
+
+provider "aws" {
+  alias  = "virginia"
+  region = "us-east-1"
+
   default_tags {
     tags = {
       Environment = "DEV"
