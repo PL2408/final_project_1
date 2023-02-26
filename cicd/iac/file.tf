@@ -43,14 +43,14 @@ resource "aws_s3_object" "update_route53_sh" {
 }
 
 # static page files
-resource "aws_s3_object" "static_page_files" {
-  for_each     = fileset("./../../website/static_page/", "**")
-  bucket       = aws_s3_bucket.sp_bucket.id
-  key          = each.value
-  source       = "./../../website/static_page/${each.value}"
-  content_type = "text/html"
-  etag         = filemd5("./../../website/static_page/${each.value}")
-}
+#resource "aws_s3_object" "static_page_files" {
+#  for_each     = fileset("./../../website/static_page/", "**")
+#  bucket       = aws_s3_bucket.sp_bucket.id
+#  key          = each.value
+#  source       = "./../../website/static_page/${each.value}"
+#  content_type = "text/html"
+#  etag         = filemd5("./../../website/static_page/${each.value}")
+#}
 
 #resource "aws_s3_bucket_object" "s3_upload" {
 #  for_each = fileset("${path.root}/build", "**/*")

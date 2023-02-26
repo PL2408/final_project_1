@@ -25,9 +25,9 @@ resource "aws_route53_record" "www_sp" {
   set_identifier = "secondary"
 
   alias {
-    name                   = aws_lb.fp01_alb.dns_name
-    zone_id                = aws_lb.fp01_alb.zone_id
-    evaluate_target_health = true
+    name                   = aws_cloudfront_distribution.s3_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.s3_distribution.hosted_zone_id
+    evaluate_target_health = false
   }
 
   failover_routing_policy {

@@ -11,23 +11,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   default_cache_behavior {
-    allowed_methods  = ["GET", "HEAD"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "web_server"
-
-
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "all"
-      }
-    }
-
+    allowed_methods        = ["GET", "HEAD"]
+    cached_methods         = ["GET", "HEAD"]
+    target_origin_id       = "web_server"
     viewer_protocol_policy = "redirect-to-https"
-    #    compress               = true
-    #    min_ttl                = 0
-    #    default_ttl            = 3600
-    #    max_ttl                = 86400
+    cache_policy_id        = data.aws_cloudfront_cache_policy.cache_s3_manages_policy.id
   }
 
   restrictions {
@@ -41,7 +29,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     minimum_protocol_version = "TLSv1"
     ssl_support_method       = "sni-only"
   }
+}
 
+data "aws_cloudfront_cache_policy" "cache_s3_manages_policy" {
+  name = "Managed-CachingOptimized"
 }
 
 resource "aws_cloudfront_origin_access_control" "cf_origin_ac" {
