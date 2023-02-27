@@ -15,7 +15,7 @@ cat <(echo "$cronjob") | crontab -
 yum update -y
 
 # installation docker
-yum install docker git htop -y
+yum install docker git htop dos2unix -y
 systemctl enable docker.service
 
 # create user web
@@ -46,9 +46,10 @@ chmod 755 /home/web/html
 systemctl start docker
 
 # start nginx
-docker run -p 80:80 -v /home/web/html:/usr/share/nginx/html:ro -d nginx
+docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
 
 # custom PS1
 aws s3 cp s3://lopihara/config/web_server_ps1.sh /etc/ps1.sh
+dos2unix /etc/ps1.sh
 echo "" >> /etc/bashrc
 echo "source /etc/ps1.sh" >> /etc/bashrc

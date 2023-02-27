@@ -13,7 +13,7 @@ cronjob="@reboot /opt/update_route53.sh"
 cat <(echo "$cronjob") | crontab -
 
 yum update -y
-yum install java git docker -y
+yum install java git docker dos2unix -y
 
 # Update Route53 record with new public IP
 aws s3 cp s3://lopihara/config/update_route53.json /opt/
@@ -60,5 +60,6 @@ docker run -d -p 8080:8080 --restart=on-failure -v jenkins_home:/var/jenkins_hom
 
 # custom PS1
 aws s3 cp s3://lopihara/config/jenkins_server_ps1.sh /etc/ps1.sh
+dos2unix /etc/ps1.sh
 echo "" >> /etc/bashrc
 echo "source /etc/ps1.sh" >> /etc/bashrc
