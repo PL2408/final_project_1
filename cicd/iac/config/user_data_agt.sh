@@ -53,5 +53,6 @@ chown -R agent:agent /home/agent/.ssh
 # custom PS1
 aws s3 cp s3://lopihara/config/jenkins_agent_ps1.sh /etc/ps1.sh
 dos2unix /etc/ps1.sh
+
 echo "" >> /etc/bashrc
 echo "source /etc/ps1.sh" >> /etc/bashrc

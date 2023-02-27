@@ -82,7 +82,7 @@ resource "aws_route53_record" "agent_dns" {
   ttl     = 300
   records = [aws_instance.jenkins_agent.private_ip]
 }
-
+  
 # private dns for web-server
 resource "aws_route53_record" "web_dns" {
   name    = "web.mp"
@@ -91,8 +91,3 @@ resource "aws_route53_record" "web_dns" {
   ttl     = 300
   records = [aws_instance.web_server.private_ip]
 }
-
-
-
-
-
