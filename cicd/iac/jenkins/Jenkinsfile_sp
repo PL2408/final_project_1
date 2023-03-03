@@ -1,4 +1,5 @@
 pipeline {
+    agent { label 'Node_1' }
     stages {
         stage('Code Validation') {
             steps {

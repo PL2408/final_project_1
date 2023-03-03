@@ -22,10 +22,6 @@ chmod +x /opt/update_route53.sh
 sed -i 's/HOSTNAME/jenkins/g' /opt/update_route53.json
 /opt/update_route53.sh
 
-# Create crontab job to update record on restart
-cronjob="@reboot /opt/update_route53.sh"
-cat <(echo "$cronjob") | crontab -
-
 # swap file for ec2 (3GB)
 echo "------------------ Create SWAP File ----------------"
 swapoff -a
