@@ -9,5 +9,15 @@ pipeline {
                 """
             }
         }
+        stage('Publish page') {
+            steps {
+                sh """
+                    cd website/static_page
+                    aws s3 cp index.html s3://web2.lopihara/index.html
+                    aws s3 cp css/bootstrap.min.css s3://web2.lopihara/css/bootstrap.min.css
+                    aws s3 cp images/petro_lazarenko_400.jpg s3://web2.lopihara/images/petro_lazarenko_400.jpg
+                """
+            }
+        }
     }
 }
