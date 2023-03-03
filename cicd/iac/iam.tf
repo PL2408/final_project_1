@@ -42,6 +42,11 @@ resource "aws_iam_policy" "s3_read_policy" {
         Resource = ["arn:aws:s3:::lopihara/*"]
       },
       {
+        Action   = ["s3:*"]
+        Effect   = "Allow"
+        Resource = ["arn:aws:s3:::web2.lopihara/*"]
+      },
+      {
         "Effect" : "Allow",
         "Action" : [
           "route53:ChangeResourceRecordSets",
