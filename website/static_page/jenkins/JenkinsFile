@@ -1,0 +1,12 @@
+pipeline {
+    stages {
+        stage('Code Validation') {
+            steps {
+                sh """
+                    cd website/static_page
+                    java -jar /opt/vnu/dist/vnu.jar index.html
+                """
+            }
+        }
+    }
+}
