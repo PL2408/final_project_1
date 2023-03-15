@@ -16,3 +16,4 @@ This CI/CD was created on Jenkins
 
 6. Agent stops container in prod / Agent starts container with latest image
 
+![Tux, the Linux mascot](static_page.drawio.svg)
