@@ -7,4 +7,4 @@ This is my project, it dedicated to DevOps technology
 3. The site is launched using Docker
 4. CI/CD based on Jenkins Pipelines
 
-![architecture diagram](cicd/iac/architecture.drawio.svg)
+![architecture diagram](cicd/iac/architecture.drawio.png)
