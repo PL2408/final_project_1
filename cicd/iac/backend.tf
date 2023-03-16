@@ -8,6 +8,17 @@ provider "aws" {
   }
 }
 
+provider "aws" {
+  alias  = "virginia"
+  region = "us-east-1"
+  default_tags {
+    tags = {
+      Environment = "DEV"
+      Project     = "Final project 01"
+    }
+  }
+}
+
 terraform {
   required_providers {
     aws = {

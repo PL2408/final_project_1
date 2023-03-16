@@ -17,10 +17,14 @@ cat <(echo "$cronjob") | crontab -
 # Install software
 #############################################
 yum update -y
-yum install java git docker -y
+yum install java git docker dos2unix -y
 
 systemctl enable docker.service
 service docker start
+
+# Download and install validator VNU: https://validator.github.io/validator/
+curl -L https://github.com/validator/validator/releases/download/20.6.30/vnu.jar_20.6.30.zip -o /opt/vnu.jar_20.6.30.zip
+unzip /opt/vnu.jar_20.6.30.zip -d /opt/vnu
 
 
 #############################################
@@ -48,5 +52,7 @@ chown -R agent:agent /home/agent/.ssh
 
 # custom PS1
 aws s3 cp s3://lopihara/config/jenkins_agent_ps1.sh /etc/ps1.sh
+dos2unix /etc/ps1.sh
+
 echo "" >> /etc/bashrc
 echo "source /etc/ps1.sh" >> /etc/bashrc
