@@ -1,6 +1,7 @@
 # CI/CD
 
-This CI/CD was created on Jenkins
+CI/CD is setup using Jenkins
+
 The project provides two pipelines for dynamic and static pages
 
 When Web server is unavailable, traffic redirects to Static page
