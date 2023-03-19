@@ -7,6 +7,10 @@ pipeline {
                 sh """
                     cd website/Docker/dynamic_page
                     java -jar /opt/vnu/dist/vnu.jar index.html
+                    java -jar /opt/vnu/dist/vnu.jar about.html
+                    java -jar /opt/vnu/dist/vnu.jar architecture.html
+                    java -jar /opt/vnu/dist/vnu.jar cicd.html
+                    java -jar /opt/vnu/dist/vnu.jar project.html
                 """
             }
         }
@@ -25,7 +29,7 @@ pipeline {
                     docker stop dynamic-page ||true
                     docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:${MJ_VERSION}.'${BUILD_NUMBER}'
                     sleep 5
-                    curl -v http://localhost/ |grep 'Petro Lazarenko'
+                    curl -v http://localhost/ |grep 'DevOps project'
                     docker stop dynamic-page
                 """
             }
@@ -45,9 +49,9 @@ pipeline {
         stage('Deploy to PROD') {
             steps {
                 sh '''
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker stop dynamic-page ||true
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker rm -f dynamic-page ||true
                     ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker pull lopihara/dynamic-page:latest
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --restart=always --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
                     ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
                 '''
             }

@@ -13,9 +13,11 @@ pipeline {
             steps {
                 sh """
                     cd website/static_page
-                    aws s3 cp index.html s3://web2.lopihara/index.html
-                    aws s3 cp css/bootstrap.min.css s3://web2.lopihara/css/bootstrap.min.css
-                    aws s3 cp images/petro_lazarenko_400.jpg s3://web2.lopihara/images/petro_lazarenko_400.jpg
+                    aws s3 cp index.html s3://project.prod/index.html
+                    aws s3 cp about.html s3://project.prod/about.html
+                    aws s3 cp architecture.html s3://project.prod/architecture.html
+                    aws s3 cp cicd.html s3://project.prod/cicd.html
+                    aws s3 cp project.html s3://project.prod/project.html
                 """
             }
         }
