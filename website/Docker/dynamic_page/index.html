@@ -1,71 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Petro Lazarenko</title>
-    <meta charset="utf-8">
-    <meta name="description" content="research and development site">
-    <link rel="shortcut icon" href="https://atom.io/favicon.ico">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- https://bootswatch.com/solar/ -->
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>DevOps project</title>
 
-<body class="d-flex h-100 text-center text-white bg-dark">
-<div class="cover-container d-flex w-100 h-100 p-3 justify-content-center">
-    <header class="mb-auto">
-        <!--     <div>
-              <h3 class="float-md-start mb-0">Petro Lazarenko</h3>
-            </div> -->
-    </header>
-    <div class="px-3 align-items-center justify-content-center">
-        <h1>Petro Lazarenko - Dynamic Page</h1>
-        <H3>Goal: become a DevOps engineer professional</H3>
-        <h3>Started in 2022</h3>
-        <p><b>Specialization</b> <br> <em>AWS engineering and design</em></p>
-        <hr>
-        <div class="row justify-content-center">
-            <div class="card bg-dark text-white border-secondary" style="width:400px">
-                <img class="card-img-top pt-2 rounded d-block" src="images/petro_lazarenko_400.jpg" alt="Card image">
-                <div class="card-body">
-                    <table class="table table-sm table-dark">
-                        <thead>
-                        <tr>
-                            <th scope="col">Skill level</th>
-                            <th scope="col"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th>AWS</th>
-                            <td>7%</td>
-                        </tr>
-                        <tr>
-                            <th>Linux</th>
-                            <td>5%</td>
-                        </tr>
-                        <tr>
-                            <th>Networks</th>
-                            <td>7%</td>
-                        </tr>
-                        <tr>
-                            <th>Python</th>
-                            <td>2%</td>
-                        </tr>
-                        <tr>
-                            <th>Jenkins</th>
-                            <td>10%</td>
-                        </tr>
-                        <tr>
-                            <th>Docker</th>
-                            <td>7%</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p>2023.02.05</p>
-            </div>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Dark Theme -->
+    <link rel="stylesheet" href="css/dark-theme.css" />
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="project.html"">DevOps project</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="project.html">Project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="architecture.html">AWS Architecture</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cicd.html">CI/CD</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Me</a>
+            </li>
+          </ul>
         </div>
-    </div>
-</div>
-</body>
+      </nav>
+    </header>
 
+  <!-- Main Content -->
+  <main>
+    <!-- Content will be loaded here -->
+  </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3 mt-auto">
+      <div class container text-center">
+    <p>Copyright &copy; 2023 My Website |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms of Service</a>
+    </p>
+  </div>
+</footer>
+
+  <!-- jQuery Library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Custom JavaScript -->
+  <script>
+    $(document).ready(function() {
+      // Load the content of page1.html into the main content area
+      $("main").load("project.html");
+      // var page = getUrlParameter("page");
+      // $("main").load(page + ".html");
+      // if (page) {
+      //   // Load the content of the corresponding file into the main content div
+      //   $("main").load(page + ".html");
+      // }
+      // else {
+      //   $("main").load("project.html");
+      // };
+      
+      // Load the content of the clicked link's href attribute into the main content area
+      $("nav a").on("click", function(event) {
+        event.preventDefault();
+        $("main").load($(this).attr("href"));
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+      });
+    });
+  </script>
+
+</body>
 </html>
