@@ -10,4 +10,34 @@
       arcu. Nam vulputate imperdiet nisl, non scelerisque turpis molestie
       vel. Nullam at elit blandit, placerat enim nec, aliquam nulla.
     </p>
+  </div> <div class="container my-5">
+    <h1 class="text-center">Website Deployment Project</h1>
+    <h2 class="mt-4">Overview</h2>
+    <p>Was created website as part of learning process. Used various DevOps tools like Jenkins, Docker, Git, HTML, CSS to deploy his website to a web server hosted on AWS. The infrastructure was described using Terraform.</p>
+    <h2 class="mt-4">AWS Virtual Machines</h2>
+    <ul>
+      <li>'jenkins_server'</li>
+      <li>'jenkins_agent'</li>
+      <li>'web_server'</li>
+    </ul>
+    <h2 class="mt-4">Deployment Steps</h2>
+    <ol>
+      <li>Developer does a commit to GitHub</li>
+      <li>GitHub webhook triggers a job in Jenkins Server</li>
+      <li>Jenkins Server runs stages on Jenkins Agent:
+        <ol type="a">
+          <li>Fetch data from GitHub</li>
+          <li>HTML code validation</li>
+          <li>Publish image to Docker Hub</li>
+          <li>Deploy to Web Server:
+            <ul>
+              <li>Stop previous running container</li>
+              <li>Download latest image from Docker Hub</li>
+              <li>Run latest image with name function and ports mapping</li>
+              <li>Filter by tag (latest) and delete container</li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ol>
   </div>
