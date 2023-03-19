@@ -55,6 +55,7 @@ pipeline {
                     ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
                 '''
             }
+
         }
     }
 }
