@@ -1,13 +1,49 @@
-<div class="container py-5">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>DevOps project</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Dark Theme -->
+    <link rel="stylesheet" href="css/dark-theme.css" />
+  </head>
+    <div class="container py-5">
     <h1 class="text-center mb-4">CI/CD</h1>
+    <div style="text-align:center;">
+    <img src="images/dynamic_page.drawio.png" alt="AWS Architecture" width="600" height="600" style="border: 1px solid black;">
+        <img src="images/static_page.drawio.png" alt="AWS Architecture" width="600" height="600" style="border: 1px solid black;">
+    </div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at
-      metus bibendum, tincidunt velit ut, consequat leo. Sed eget tellus
-      tincidunt, elementum massa a, congue nisi. Vestibulum ante ipsum
-      primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-      Duis pulvinar justo eu ligula consectetur ultrices. Nullam non
-      tincidunt quam. Aenean eget dolor eu eros pretium bibendum vitae vel
-      arcu. Nam vulputate imperdiet nisl, non scelerisque turpis molestie
-      vel. Nullam at elit blandit, placerat enim nec, aliquam nulla.
+      Continuous Integration/Continuous Delivery (CI/CD) is a software development methodology that ensures the continuous and automated delivery of software applications to production environments. It involves a series of practices that enable development teams to build, test, and deploy code changes quickly and efficiently. One popular tool for implementing CI/CD is Jenkins, an open-source automation server that provides a comprehensive set of features for building, testing, and deploying software applications. In this article, we will discuss the construction plan for setting up CI/CD using Jenkins for a project that provides two pipelines for dynamic and static pages.
+
+The Construction Plan for CI/CD using Jenkins:
+
+Step 1: User creates, adds, and pushes a commit to GitHub
+The first step in the construction plan is for the user to create, add, and push a commit to the project's GitHub repository. This commit will trigger the Jenkins job, which will initiate the CI/CD pipeline.
+
+Step 2: GitHub triggers Jenkins job
+Once the user pushes a commit to the GitHub repository, GitHub triggers the Jenkins job. Jenkins then begins executing the job on the Jenkins agent.
+
+Step 3: Jenkins server executes job on agent
+The Jenkins server executes the job on the Jenkins agent, which is a separate server that is responsible for building, testing, and deploying the software application. The agent executes the job in a separate environment, which ensures that the job does not interfere with any other processes running on the Jenkins server.
+
+Step 4: Build image
+The next step in the construction plan is to build the image. The agent pulls the code from the GitHub repository and builds the Docker image using the Dockerfile. The Docker image is a self-contained unit that contains all the necessary dependencies and configurations required to run the software application.
+
+Step 5: Agent pushes image to Docker Hub
+After building the Docker image, the agent pushes the image to Docker Hub, which is a public repository for storing and sharing Docker images. This step ensures that the Docker image is available for deployment to the production environment.
+
+Step 6:The final step in the CI/CD plan is to stop the container in production and start the container with the latest image.
+When the webserver is unavailable, traffic redirects to the static page. The static page is a simplified version of the website that contains basic information about the company, products, and services.
     </p>
   </div>
