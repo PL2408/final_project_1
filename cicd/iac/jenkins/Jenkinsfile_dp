@@ -25,7 +25,7 @@ pipeline {
                     docker stop dynamic-page ||true
                     docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:${MJ_VERSION}.'${BUILD_NUMBER}'
                     sleep 5
-                    curl -v http://localhost/ |grep 'DevOps project'
+                    curl -v http://localhost/ |grep 'DevOps-ik'
                     docker stop dynamic-page
                 """
             }
