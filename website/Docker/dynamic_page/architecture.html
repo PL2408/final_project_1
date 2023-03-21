@@ -1,35 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>DevOps project</title>
-
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <!-- Dark Theme -->
-    <link rel="stylesheet" href="css/dark-theme.css" />
-  </head>
 <div class="container py-5">
-    <h1 class="text-center mb-4">AWS Architecture</h1>
-    <div style="text-align:center;">
-    <img src="images/architecture.drawio.png" alt="AWS Architecture" width="600" height="600" style="border: 1px solid black;">
-</div>
-    <p>
-Using Terraform to describe infrastructure as code is a good practice and it helps in automating the infrastructure deployment process. Building the project on AWS platform is a provides various services and features that can help in building a scalable and secure infrastructure.
+  <h2 class="text-center mb-4">AWS Architecture</h2>
+  <p>Using Terraform to describe infrastructure as code is a good practice and it helps in automating the infrastructure
+    deployment process. Building the project on AWS platform is a provides various services and features that can help
+    in building a scalable and secure infrastructure.</p>
 
-Using Docker to launch the site based on Nginx image is it provides a lightweight and portable environment to run the application. Additionally, using CloudFront for the static website is it helps in delivering the content faster to the end-users by caching the content on the edge locations.
+  <p>Using Docker to launch the site based on Nginx image is it provides a lightweight and portable environment to run
+    the application. Additionally, using CloudFront for the static website is it helps in delivering the content faster
+    to the end-users by caching the content on the edge locations.</p>
 
-Jenkins is a popular CI/CD tool and using it in the project is it helps in automating the build, test and deployment process.
+  <p>Jenkins is a popular CI/CD tool and using it in the project is it helps in automating the build, test and
+    deployment process.</p>
+  <p>Using Public Subnets to avoid additional costs for NAT Gateway is a good approach to minimize the costs, however,
+    it's important to consider the security aspects while using Public Subnets.</p>
 
-Using Public Subnets to avoid additional costs for NAT Gateway is a good approach to minimize the costs, however, it's important to consider the security aspects while using Public Subnets.
-
-    </p>
+  <div class="text-center">
+    <img src="images/architecture.png" alt="AWS Architecture" width="600px" class="img-fluid">
   </div>
+</div>

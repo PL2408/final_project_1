@@ -1,50 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>DevOps project</title>
-
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <!-- Dark Theme -->
-    <link rel="stylesheet" href="css/dark-theme.css" />
-  </head>
 <div class="container py-5">
-    <h1 class="text-center">Website Deployment Project</h1>
-    <h2 class="mt-4">Overview</h2>
-    <p>Was created website as part of learning process. Used various DevOps tools like Jenkins, Docker, Git, HTML, CSS to deploy his website to a web server hosted on AWS. The infrastructure was described using Terraform.</p>
-    <h2 class="mt-4">AWS Virtual Machines</h2>
-    <ul>
-      <li>'jenkins_server'</li>
-      <li>'jenkins_agent'</li>
-      <li>'web_server'</li>
-    </ul>
-    <h2 class="mt-4">Deployment Steps</h2>
-    <ol>
-      <li>Developer does a commit to GitHub</li>
-      <li>GitHub webhook triggers a job in Jenkins Server</li>
-      <li>Jenkins Server runs stages on Jenkins Agent:
-        <ol type="a">
-          <li>Fetch data from GitHub</li>
-          <li>HTML code validation</li>
-          <li>Publish image to Docker Hub</li>
-          <li>Deploy to Web Server:
-            <ul>
-              <li>Stop previous running container</li>
-              <li>Download latest image from Docker Hub</li>
-              <li>Run latest image with name function and ports mapping</li>
-              <li>Filter by tag (latest) and delete container</li>
-            </ul>
-          </li>
-        </ol>
-      </li>
-    </ol>
+  <div class="card text-white bg-primary mb-3" style="max-width: 80rem;">
+    <div class="card-header ">About Project</div>
+    <div class="card-body">
+      <h4 class="card-title">Overview</h4>
+      <p>This project is created as part of learning process. It were used various DevOps tools like Jenkins, Docker, Git,
+        HTML, CSS during the work on it. Amazon Web Services is used as platform to host tools. The infrastructure is
+        described in Terraform code.</p>
+      <p>The idea is to build CI/CD process for application development. Application is this website. Jenkins Server was
+        chosen as a main CI/CD tool.</p>
+      <h4 class="mt-4">CI/CD infrastucture consists of:</h4>
+      <ul>
+        <li>Jenkins Server</li>
+        <li>Jenkins Agent</li>
+        <li>Web Server</li>
+      </ul>
+    </div>
   </div>
+  
+  <!-- <h1 class="text-center">About Project</h1>
+  <h2 class="mt-4">Overview</h2>
+  <p>This project is created as part of learning process. It were used various DevOps tools like Jenkins, Docker, Git,
+    HTML, CSS during the work on it. Amazon Web Services is used as platform to host tools. The infrastructure is
+    described in Terraform code.</p>
+  <p>The idea is to build CI/CD process for application development. Application is this website. Jenkins Server was
+    chosen as a main CI/CD tool.</p>
+  <h2 class="mt-4">CI/CD infrastucture consists of:</h2>
+  <ul>
+    <li>Jenkins Server</li>
+    <li>Jenkins Agent</li>
+    <li>Web Server</li>
+  </ul>
+  <h2 class="mt-4">CI/CD Workflow</h2>
+  <ol>
+    <li>Developer does a commit to GitHub</li>
+    <li>GitHub webhook triggers a job on Jenkins Server</li>
+    <li>Jenkins Server runs stages on Jenkins Agent:
+      <ol type="a">
+        <li>Fetch data from GitHub</li>
+        <li>HTML code validation</li>
+        <li>Publish image to Docker Hub</li>
+        <li>Deploy to Web Server:
+          <ul>
+            <li>Stop previous running container</li>
+            <li>Download latest image from Docker Hub</li>
+            <li>Run latest image with name function and ports mapping</li>
+            <li>Cleanup Docker images and containers</li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+  </ol> -->
+</div>

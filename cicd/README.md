@@ -20,6 +20,6 @@ When Web server is unavailable, traffic redirects to Static page
 
 6. Agent stops container in prod / Agent starts container with latest image
 
-![Tux, the Linux mascot](dynamic_page.drawio.svg)
+![Tux, the Linux mascot](../website/Docker/dynamic_page/images/dynamic_page.drawio.svg)
 
-![Tux, the Linux mascot](static_page.drawio.svg)
+![Tux, the Linux mascot](../website/Docker/dynamic_page/images/static_page.drawio.svg)
