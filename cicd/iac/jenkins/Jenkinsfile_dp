@@ -7,9 +7,6 @@ pipeline {
                 sh """
                     cd website/Docker/dynamic_page
                     java -jar /opt/vnu/dist/vnu.jar index.html
-                    java -jar /opt/vnu/dist/vnu.jar project.html
-                    java -jar /opt/vnu/dist/vnu.jar architecture.html
-                    java -jar /opt/vnu/dist/vnu.jar cicd.html
                 """
             }
         }
