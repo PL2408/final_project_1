@@ -10,6 +10,39 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/slate/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <!-- jQuery Library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <!-- Custom JavaScript -->
+  <script>
+    $(document).ready(function () {
+      var page = getUrlParameter("page");
+      if (page) {
+        // Load the content of the corresponding file into the main content div
+        $("main").load(page + ".html");
+      } else {
+        // Load the content of project.html into the main content area
+        $("main").load("project.html");
+      }
+
+      // Load the content of the clicked link's href attribute into the main content area
+      $("nav a").on("click", function (event) {
+        event.preventDefault();
+        $("main").load($(this).attr("href"));
+        $(".nav-link").removeClass("active");
+        $(this).addClass("active");
+      });
+    });
+
+    // Function to get the value of a query parameter from the URL
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+      var results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+  </script>
 </head>
 
 <body class="d-flex flex-column bg-dark min-vh-100">
@@ -66,39 +99,5 @@
     </div>
   </footer>
 </body>
-
-<!-- jQuery Library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-<!-- Custom JavaScript -->
-<script>
-  $(document).ready(function () {
-    var page = getUrlParameter("page");
-    if (page) {
-      // Load the content of the corresponding file into the main content div
-      $("main").load(page + ".html");
-    } else {
-      // Load the content of project.html into the main content area
-      $("main").load("project.html");
-    }
-
-    // Load the content of the clicked link's href attribute into the main content area
-    $("nav a").on("click", function (event) {
-      event.preventDefault();
-      $("main").load($(this).attr("href"));
-      $(".nav-link").removeClass("active");
-      $(this).addClass("active");
-    });
-  });
-
-  // Function to get the value of a query parameter from the URL
-  function getUrlParameter(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-    var results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
-</script>
 
 </html>
