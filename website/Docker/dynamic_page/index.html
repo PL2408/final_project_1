@@ -65,36 +65,40 @@
       </p>
     </div>
   </footer>
+</body>
 
-  <!-- jQuery Library -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</html>
 
-  <!-- Custom JavaScript -->
-  <script>
-    $(document).ready(function () {
-      var page = getUrlParameter("page");
-      if (page) {
-        // Load the content of the corresponding file into the main content div
-        $("main").load(page + ".html");
-      } else {
-        // Load the content of project.html into the main content area
-        $("main").load("project.html");
-      }
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-      // Load the content of the clicked link's href attribute into the main content area
-      $("nav a").on("click", function (event) {
-        event.preventDefault();
-        $("main").load($(this).attr("href"));
-        $(".nav-link").removeClass("active");
-        $(this).addClass("active");
-      });
-    });
 
-    // Function to get the value of a query parameter from the URL
-    function getUrlParameter(name) {
-      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-      var results = regex.exec(location.search);
-      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+<!-- Custom JavaScript -->
+<script>
+  $(document).ready(function () {
+    var page = getUrlParameter("page");
+    if (page) {
+      // Load the content of the corresponding file into the main content div
+      $("main").load(page + ".html");
+    } else {
+      // Load the content of project.html into the main content area
+      $("main").load("cicd.html");
     }
-  </script>
+
+    // Load the content of the clicked link's href attribute into the main content area
+    $("nav a").on("click", function (event) {
+      event.preventDefault();
+      $("main").load($(this).attr("href"));
+      $(".nav-link").removeClass("active");
+      $(this).addClass("active");
+    });
+  });
+
+  // Function to get the value of a query parameter from the URL
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+    var results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+</script>
