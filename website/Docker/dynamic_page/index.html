@@ -20,18 +20,24 @@
       var page = getUrlParameter("page");
       if (page) {
         // Load the content of the corresponding file into the main content div
-        $("main").load(page + ".html");
+        $("#content").load(page + ".html");
       } else {
         // Load the content of project.html into the main content area
-        $("main").load("project.html");
+        $("#content").load("project.html");
       }
 
       // Load the content of the clicked link's href attribute into the main content area
-      $("nav a").on("click", function (event) {
-        event.preventDefault();
-        $("main").load($(this).attr("href"));
-        $(".nav-link").removeClass("active");
-        $(this).addClass("active");
+
+      $('nav a[data-target]').on('click', function (e) {
+        e.preventDefault();
+        var target = $(this).data('target');
+        if (target === 'github' || target === 'linkedin') {
+          window.open(target === 'github' ? 'https://github.com/project' : 'https://linkedin.com/profile', '_blank');
+        } else {
+          $('#content').load($(this).attr("href"));
+          $(".nav-link").removeClass("active");
+          $(this).addClass("active");
+        }
       });
     });
 
@@ -57,25 +63,25 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="project.html">Project</a>
+            <a data-target="project" class="nav-link active" href="project.html">Project</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="architecture.html">AWS Architecture</a>
+            <a data-target="architecture" class="nav-link" href="architecture.html">AWS Architecture</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cicd.html">CI/CD</a>
+            <a data-target="cicd" class="nav-link" href="cicd.html">CI/CD</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About Me</a>
+            <a data-target="about" class="nav-link" href="about.html">About Me</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-md-auto">
           <li class="nav-item">
-            <a target="_blank" rel="noopener" class="nav-link" href="https://github.com/PL2408"><i
-                class="bi bi-github"></i> GitHub</a>
+            <a data-target="github" rel="noopener" class="nav-link" href="https://github.com/PL2408"><i
+                class="bi bi-github"></i>GitHub</a>
           </li>
           <li class="nav-item">
-            <a target="_blank" rel="noopener" class="nav-link"
+            <a data-target="linkedin" rel="noopener" class="nav-link"
               href="https://www.linkedin.com/in/petro-lazarenko-483526255/?originalSubdomain=ua"><i
                 class="bi bi-twitter"></i>LinkedIn</a>
           </li>
@@ -85,17 +91,14 @@
   </header>
 
   <!-- Main Content -->
-  <main>
+  <div id="content">
     <!-- Content will be loaded here -->
-  </main>
+  </div>
 
   <!-- Footer -->
   <footer class="bg-dark text-white py-3 mt-auto">
     <div class="container text-center">
-      <p>&copy; 2023 DevOps-ik | <a href="mailto:pt.lazarenko@gmail.com">email</a>
-        <!-- <a href="#">Privacy Policy</a> |
-      <a href="#">Terms of Service</a> -->
-      </p>
+      <p>&copy; 2023 DevOps-ik | <a href="mailto:pt.lazarenko@gmail.com">email</a></p>
     </div>
   </footer>
 </body>
