@@ -67,8 +67,6 @@
   </footer>
 </body>
 
-</html>
-
 <!-- jQuery Library -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -82,7 +80,7 @@
       $("main").load(page + ".html");
     } else {
       // Load the content of project.html into the main content area
-      $("main").load("cicd.html");
+      $("main").load("project.html");
     }
 
     // Load the content of the clicked link's href attribute into the main content area
@@ -102,3 +100,5 @@
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
   }
 </script>
+
+</html>
