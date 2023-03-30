@@ -5,7 +5,7 @@ pipeline {
         stage('Code Validation') {
             steps {
                 sh """
-                    cd website/Docker/dynamic_page
+                    cd website/html_page
                     java -jar /opt/vnu/dist/vnu.jar index.html
                 """
             }
@@ -14,19 +14,19 @@ pipeline {
             steps {
                 sh """
                     docker rmi -f \$(docker images |grep -v nginx |awk 'NR>1 {print \$3}'|uniq) ||true
-                    cd website/Docker
-                    docker build -t lopihara/dynamic-page:latest -t lopihara/dynamic-page:${MJ_VERSION}.'${BUILD_NUMBER}' .
+                    cd website/
+                    docker build -t lopihara/devopsik-page:latest -t lopihara/devopsik-page:${MJ_VERSION}.'${BUILD_NUMBER}' .
                 """
             }
         }
         stage('Project Validation') {
             steps {
                 sh """
-                    docker stop dynamic-page ||true
-                    docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:${MJ_VERSION}.'${BUILD_NUMBER}'
+                    docker stop devopsik-page ||true
+                    docker run -d -it --rm --name devopsik-page -p 80:80 lopihara/devopsik-page:${MJ_VERSION}.'${BUILD_NUMBER}'
                     sleep 5
                     curl -v http://localhost/ |grep 'DevOps-ik'
-                    docker stop dynamic-page
+                    docker stop devopsik-page
                 """
             }
         }
@@ -35,8 +35,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'docker_token', variable: 'DKR_TOKEN')]) {
                     sh """
                         docker login -u lopihara -p '${DKR_TOKEN}'
-                        docker push lopihara/dynamic-page:latest
-                        docker push lopihara/dynamic-page:${MJ_VERSION}.'${BUILD_NUMBER}'
+                        docker push lopihara/devopsik-page:latest
+                        docker push lopihara/devopsik-page:${MJ_VERSION}.'${BUILD_NUMBER}'
                     """
                 }
             }
@@ -45,9 +45,9 @@ pipeline {
         stage('Deploy to PROD') {
             steps {
                 sh '''
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker rm -f dynamic-page ||true
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker pull lopihara/dynamic-page:latest
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --restart=always --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker rm -f devopsik-page ||true
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker pull lopihara/devopsik-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --restart=always --name devopsik-page -p 80:80 lopihara/devopsik-page:latest
                     ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
                 '''
             }
