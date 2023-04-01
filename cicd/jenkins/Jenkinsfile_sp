@@ -4,8 +4,16 @@ pipeline {
         stage('Code Validation') {
             steps {
                 sh """
-                    cd website/static_page
+                    cd website/html_page
                     java -jar /opt/vnu/dist/vnu.jar index.html
+                """
+            }
+        }
+        stage('Static page markup') {
+            steps {
+                sh """
+                    cd website/html_page
+                    sed -i 's%<em><strong>D</strong></em>%<em><strong>S</strong></em>%g' index.html
                 """
             }
         }
