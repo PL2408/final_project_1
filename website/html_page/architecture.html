@@ -7,7 +7,8 @@
     </div>
     <ul>
       <li class="list-group-item">
-        <img src="images/architecture.png" alt="architecture" style="width: 18rem;">
+        <img src="images/architecture.png" alt="architecture" class="float-start img-fluid imageViewBig"
+          style="width: 18rem;">
       </li>
     </ul>
     <div class="card-body">
@@ -34,27 +35,18 @@
   </div>
 </div>
 
-
-
-
-
-
-<!-- <div class="container py-5">
-  <h2 class="text-center mb-4">AWS Architecture</h2>
-  <p>Using Terraform to describe infrastructure as code is a good practice and it helps in automating the infrastructure
-    deployment process. Building the project on AWS platform is a provides various services and features that can help
-    in building a scalable and secure infrastructure.</p>
-
-  <p>Using Docker to launch the site based on Nginx image is it provides a lightweight and portable environment to run
-    the application. Additionally, using CloudFront for the static website is it helps in delivering the content faster
-    to the end-users by caching the content on the edge locations.</p>
-
-  <p>Jenkins is a popular CI/CD tool and using it in the project is it helps in automating the build, test and
-    deployment process.</p>
-  <p>Using Public Subnets to avoid additional costs for NAT Gateway is a good approach to minimize the costs, however,
-    it's important to consider the security aspects while using Public Subnets.</p>
-
-  <div class="text-center">
-    <img src="images/architecture.png" alt="AWS Architecture" width="600px" class="img-fluid">
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="modalImgageView" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-body text-center">
+      <img src="assets/images/nophoto.png" alt="Image Title" class="img-fluid" id="modalImgageViewIMG">
+    </div>
   </div>
-</div> -->
+</div>
+<script>
+  $(document).on("click", ".imageViewBig", function () {
+    let url = $(this).attr('src');
+    $('#modalImgageViewIMG').attr('src', url);
+    $('#modalImgageView').modal('toggle');
+  });
+</script>

@@ -27,9 +27,8 @@
           </ol>
         </li>
         <li class="list-group-item">
-          <div class="img-wrapper">
-          <img src="images/dynamic_page.drawio.svg" alt="architecture" style="width: 25rem;" class='imageViewBig'/>
-        </div>          
+          <img id="imageresource" src="images/dynamic_page.drawio.svg" alt="cicd" class="img-fluid imageViewBig"
+            style="max-width: 30rem;">
         </li>
       </ul>
     </div>
@@ -52,7 +51,8 @@
           </ol>
         </li>
         <li class="list-group-item">
-          <img src="images/static_page.drawio.svg" alt="architecture" style="width: 25rem;">
+          <img id="imageresource" src="images/static_page.drawio.svg" alt="cicd" class="img-fluid imageViewBig"
+            style="max-width: 30rem;">
         </li>
       </ul>
     </div>
@@ -119,94 +119,18 @@
     </div>
   </div>
 
-
-  <!-- <div class="container py-5">
-  <h1 class="text-center mb-4">CI/CD</h1>
-
-  <div style="text-align:center;">
-    <img src="images/html_page.drawio.svg" alt="AWS Architecture" width="600">
-  </div>
-
-  <div style="display:flex;">
-    <div style="flex-basis: 20%;white-space:nowrap;">
-      <h4>Plan:</h4>
-      <ul class="list-group">
-        <li class="list-group-item">
-          Developer does commit to GitHub
-        </li>
-        <li class="list-group-item">
-          GitHub webhook triggers job in Jenkins Server
-        </li>
-        <li class="list-group-item">
-          Jenkins Server runs stages on Jenkins Agent
-          <ol>
-            <li>fetch data from GitHub</li>
-            <li>HTML code validation</li>
-            <li>publish image to S3 Bucket</li>
-              </ul>
-            </li>
-          </ol>
-        </li>
-      </ul>
-    </div>
-  </div> -->
-  <!-- <div style="text-align:center;">
-    <img src="images/static_page.drawio.svg" alt="AWS Architecture" width="600">
-  </div>
-
-
-  <div style="display:flex;">
-    <div style="flex-basis: 20%;white-space:nowrap;">
-      <h4>Plan:</h4>
-      <ol style="list-style-type: decimal; padding-left: 0; margin-left: 0;">
-        <li style="padding-left: 0;">Developer does commit to GitHub</li>
-        <li style="padding-left: 0;">GitHub webhook triggers job in Jenkins Server</li>
-        <li style="padding-left: 0;">Jenkins Server runs stages on Jenkins Agent
-          <ol style="list-style-type: lower-alpha; padding-left: 0; margin-left: 0;">
-            <li style="padding-left: 20px;">fetch data from GitHub</li>
-            <li style="padding-left: 20px;">HTML code validation</li>
-            <li style="padding-left: 20px;">publish image to S3 Bucket</li>
-          </ol>
-      </ol>
+  <!-- Creates the bootstrap modal where the image will appear -->
+  <div class="modal fade" id="modalImgageView" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-body text-center">
+        <img src="assets/images/nophoto.png" alt="Image Title" class="img-fluid" id="modalImgageViewIMG">
+      </div>
     </div>
   </div>
-
-  <p>Continuous Integration/Continuous Delivery (CI/CD) is a software development methodology that ensures the
-    continuous and automated delivery of software applications to production environments. It involves a series of
-    practices that enable development teams to build, test, and deploy code changes quickly and efficiently. One popular
-    tool for
-    implementing CI/CD is Jenkins, an open-source automation server that provides a comprehensive set of features for
-    building, testing, and deploying software applications. In this article, we will discuss the construction plan for
-    setting up CI/CD using Jenkins for a project that provides two pipelines for dynamic and static pages.</p>
-
-  <p><strong>The Construction Plan for CI/CD using Jenkins:</strong></p>
-
-  <p><strong>Step 1:</strong> User creates, adds, and pushes a commit to GitHub</p>
-  <p>The first step in the construction plan is for the user to create, add, and push a commit to the project's GitHub
-    repository. This commit will trigger the Jenkins job, which will initiate the CI/CD pipeline.</p>
-
-  <p><strong>Step 2:</strong> GitHub triggers Jenkins job</p>
-  <p>Once the user pushes a commit to the GitHub repository, GitHub triggers the Jenkins job. Jenkins then begins
-    executing the job on the Jenkins agent.</p>
-
-  <p><strong>Step 3:</strong> Jenkins server executes job on agent</p>
-  <p>The Jenkins server executes the job on the Jenkins agent, which is a separate server that is responsible for
-    building, testing, and deploying the software application. The agent executes the job in a separate environment,
-    which ensures that the job does not interfere with any other processes running on the Jenkins server.</p>
-
-  <p><strong>Step 4:</strong> Build image</p>
-  <p>The next step in the construction plan is to build the image. The agent pulls the code from the GitHub repository
-    and builds the Docker image using the Dockerfile. The Docker image is a self-contained unit that contains all the
-    necessary dependencies and configurations required to run the software application.</p>
-
-  <p><strong>Step 5:</strong> Agent pushes image to Docker Hub</p>
-  <p>After building the Docker image, the agent pushes the image to Docker Hub, which is a public repository for storing
-    and sharing Docker images. This step ensures that the Docker image is available for deployment to the production
-    environment.</p>
-
-  <p><strong>Step 6:</strong> The final step in the CI/CD plan is to stop the container in production and start the
-    container with the
-    latest image.<br>
-    When the webserver is unavailable, traffic redirects to the static page. The static page is a simplified version of
-    the website that contains basic information about the company, products, and services.</p>
-</div> -->
+  <script>
+    $(document).on("click", ".imageViewBig", function () {
+      let url = $(this).attr('src');
+      $('#modalImgageViewIMG').attr('src', url);
+      $('#modalImgageView').modal('toggle');
+    });
+  </script>
