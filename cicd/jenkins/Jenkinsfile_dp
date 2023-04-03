@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Publish Docker Image') {
             steps {
-                withCredentials([string(credentialsId: 'docke_token', variable: 'DKR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'docker_token', variable: 'DKR_TOKEN')]) {
                     sh """
                         docker login -u lopihara -p '${DKR_TOKEN}'
                         docker push lopihara/devopsik-page:latest
