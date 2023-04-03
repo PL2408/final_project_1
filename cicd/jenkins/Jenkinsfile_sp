@@ -20,7 +20,7 @@ pipeline {
         stage('Publish page') {
             steps {
                 sh """
-                    aws s3 cp s3://web2.lopihara/ . --recursive
+                    aws s3 sync website/html_page s3://web2.lopihara/ --delete
                 """
             }
         }
