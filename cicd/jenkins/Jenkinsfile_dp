@@ -2,6 +2,7 @@ def MJ_VERSION = "5"
 def TLG_URL = "https://api.telegram.org"
 def MSG_OK = "%F0%9F%97%99Job%20is%20Success"
 def MSG_FAIL = "%F0%9F%97%99Job%20is%20Failed"
+
 pipeline {
     agent { label 'Node_1' }
     stages {
@@ -61,7 +62,7 @@ pipeline {
         success {
             withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
                     sh """
-                        curl '${TLG_URL}'/'${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_OK}'
+                        curl '${TLG_URL}'/'${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text=%F0%9F%97%99Job%20is%20Success
                     """
                 }
         }
