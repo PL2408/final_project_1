@@ -1,7 +1,7 @@
 def MJ_VERSION = "5"
 def TLG_URL = "https://api.telegram.org"
-def MSG_OK = "✅Job%20is%20Success"
-def MSG_FAIL = "❌%20Job%20is%20Failed"
+def MSG_OK = "✅: Job D - Success"
+def MSG_FAIL = "❌: Job D - Failed"
 
 pipeline {
     agent { label 'Node_1' }
@@ -36,7 +36,7 @@ pipeline {
         }
         stage('Publish Docker Image') {
             steps {
-                withCredentials([string(credentialsId: 'docke_token', variable: 'DKR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'docker_token', variable: 'DKR_TOKEN')]) {
                     sh """
                         docker login -u lopihara -p '${DKR_TOKEN}'
                         docker push lopihara/devopsik-page:latest
