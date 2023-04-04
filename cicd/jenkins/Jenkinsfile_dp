@@ -1,7 +1,7 @@
 def MJ_VERSION = "5"
 def TLG_URL = "https://api.telegram.org"
-def MSG_OK = "✅: Job D - Success"
-def MSG_FAIL = "❌: Job D - Failed"
+def MSG_OK = "✅:%20Job%20D%20-%20Success"
+def MSG_FAIL = "❌:%20Job%20D%20-%20Failed"
 
 pipeline {
     agent { label 'Node_1' }
