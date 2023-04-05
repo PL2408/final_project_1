@@ -1,3 +1,7 @@
+def TLG_URL = "https://api.telegram.org"
+def MSG_OK = "✅:%20Job%20S%20-%20Success"
+def MSG_FAIL = "❌:%20Job%20S%20-%20Failed"
+
 pipeline {
     agent { label 'Node_1' }
     stages {
@@ -22,6 +26,22 @@ pipeline {
                 sh """
                     aws s3 sync website/html_page s3://web2.lopihara/ --delete
                 """
+            }
+        }
+        post {
+            success {
+                withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
+                     sh """
+                         curl \''${TLG_URL}'/'${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_OK}'\'
+                     """
+                }
+            }
+            failure {
+                withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
+                     sh """
+                         curl \''${TLG_URL}'/'${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_FAIL}'\'
+                     """
+                }
             }
         }
     }
