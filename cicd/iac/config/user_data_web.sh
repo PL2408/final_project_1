@@ -46,7 +46,7 @@ chmod 755 /home/web/html
 systemctl start docker
 
 # start nginx
-docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+docker run -d -it --rm --name devopsik-page -p 80:80 lopihara/devopsik-page:latest
 
 # custom PS1
 aws s3 cp s3://lopihara/config/web_server_ps1.sh /etc/ps1.sh
