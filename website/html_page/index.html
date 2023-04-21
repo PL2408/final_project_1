@@ -21,6 +21,17 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T61Y4CL1K7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-T61Y4CL1K7');
+
+</script>
+
 <body class="d-flex flex-column bg-dark min-vh-100">
 <!-- Header -->
 <header>
@@ -110,16 +121,6 @@
       var results = regex.exec(location.search);
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
-
-</script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T61Y4CL1K7"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-T61Y4CL1K7');
 
 </script>
 </body>
