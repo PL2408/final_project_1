@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "lopihara.iplatinum.pro"
+  domain_name       = "devopsik.iturbo.click"
   validation_method = "DNS"
 
   lifecycle {

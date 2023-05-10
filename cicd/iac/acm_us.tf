@@ -1,5 +1,5 @@
 resource "aws_acm_certificate" "cert_us" {
-  domain_name       = "lopihara.iplatinum.pro"
+  domain_name       = "devopsik.iturbo.click"
   validation_method = "DNS"
   provider          = aws.virginia
 

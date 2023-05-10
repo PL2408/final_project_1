@@ -1,10 +1,10 @@
 {
-  "Comment": "Update the A record for .lopihara.iplatinum.pro",
+  "Comment": "Update the A record for .devopsik.iturbo.click",
   "Changes": [
     {
       "Action": "UPSERT",
       "ResourceRecordSet": {
-        "Name": "HOSTNAME.lopihara.iplatinum.pro",
+        "Name": "HOSTNAME.devopsik.iturbo.click",
         "Type": "A",
         "TTL": 60,
         "ResourceRecords": [
