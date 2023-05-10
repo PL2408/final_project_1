@@ -33,14 +33,14 @@ pipeline {
         success {
             withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
                 sh """
-                    curl \''${TLG_URL}'/'${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_OK}'\'
+                    curl \''${TLG_URL}'/'bot${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_OK}'\'
                 """
             }
         }
         failure {
             withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
                 sh """
-                    curl \''${TLG_URL}'/'${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_FAIL}'\'
+                    curl \''${TLG_URL}'/'bot${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_FAIL}'\'
                 """
            }
         }
