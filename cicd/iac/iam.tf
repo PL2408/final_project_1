@@ -53,7 +53,7 @@ resource "aws_iam_policy" "s3_read_policy" {
           "route53:ChangeResourceRecordSets"
         ],
         "Resource" : [
-          "arn:aws:route53:::hostedzone/Z0960483MNZL4IMNIR4U"
+          "arn:aws:route53:::hostedzone/Z047808738KXU4X3TXN0Q"
         ]
       },
       {
