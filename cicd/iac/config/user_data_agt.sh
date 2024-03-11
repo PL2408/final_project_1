@@ -44,7 +44,7 @@ chmod 700 /home/agent/.ssh
 
 aws s3 cp s3://lopihara/ssh_keys/web.pk /home/agent/.ssh/web.pk
 aws s3 cp s3://lopihara/ssh_keys/agent.pub /home/agent/.ssh/agent.pub
-mv /home/agent/.ssh/agent.pb /home/agent/.ssh/authorized_keys
+mv /home/agent/.ssh/agent.pub /home/agent/.ssh/authorized_keys
 
 chmod 400 /home/agent/.ssh/web.pk
 chmod 600 /home/agent/.ssh/authorized_keys
