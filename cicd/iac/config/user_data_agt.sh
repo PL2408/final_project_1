@@ -18,6 +18,7 @@ cat <(echo "$cronjob") | crontab -
 #############################################
 yum update -y
 yum install java git docker dos2unix -y
+dos2unix /opt/update_route53.sh
 
 systemctl enable docker.service
 service docker start
@@ -42,7 +43,7 @@ mkdir /home/agent/.ssh
 chmod 700 /home/agent/.ssh
 
 aws s3 cp s3://lopihara/ssh_keys/web.pk /home/agent/.ssh/web.pk
-aws s3 cp s3://lopihara/ssh_keys/agent.pb /home/agent/.ssh/agent.pb
+aws s3 cp s3://lopihara/ssh_keys/agent.pub /home/agent/.ssh/agent.pub
 mv /home/agent/.ssh/agent.pb /home/agent/.ssh/authorized_keys
 
 chmod 400 /home/agent/.ssh/web.pk
