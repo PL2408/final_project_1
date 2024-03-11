@@ -6,7 +6,9 @@ aws s3 cp s3://lopihara/config/update_route53.json /opt/
 aws s3 cp s3://lopihara/config/update_route53.sh /opt/
 chmod +x /opt/update_route53.sh
 sed -i 's/HOSTNAME/web/g' /opt/update_route53.json
-/opt/update_route53.sh
+
+yum install docker git htop dos2unix -y
+dos2unix /opt/update_route53.sh
 
 # Create crontab job to update record on restart
 cronjob="@reboot /opt/update_route53.sh"
@@ -15,7 +17,6 @@ cat <(echo "$cronjob") | crontab -
 yum update -y
 
 # installation docker
-yum install docker git htop dos2unix -y
 systemctl enable docker.service
 
 # create user web
