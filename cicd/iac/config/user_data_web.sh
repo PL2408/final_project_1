@@ -27,6 +27,7 @@ usermod -a -G docker web
 
 mkdir -p /home/web/.ssh
 
+# use (ssh-keygen -b 4096 -t rsa) command for generating key pairs
 # add web pb_k
 aws s3 cp s3://lopihara/ssh_keys/web4k.pub /home/web/.ssh/web4k.pub
 mv /home/web/.ssh/web4k.pub /home/web/.ssh/authorized_keys
