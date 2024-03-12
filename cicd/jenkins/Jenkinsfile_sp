@@ -24,7 +24,7 @@ pipeline {
         stage('Publish page') {
             steps {
                 sh """
-                    aws s3 sync website/html_page s3://web2.lopihara/ --delete
+                    aws s3 sync website/html_page s3://devopsik-page/ --delete
                 """
             }
         }

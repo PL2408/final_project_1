@@ -44,7 +44,7 @@ resource "aws_iam_policy" "s3_read_policy" {
       {
         Action   = ["s3:*"]
         Effect   = "Allow"
-        Resource = ["arn:aws:s3:::web2.lopihara/*"]
+        Resource = ["arn:aws:s3:::devopsik-page/*"]
       },
       {
         "Effect" : "Allow",
