@@ -49,10 +49,10 @@ pipeline {
         stage('Deploy to PROD') {
             steps {
                 sh '''
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker rm -f devopsik-page ||true
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker pull lopihara/devopsik-page:latest
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp docker run -d -it --restart=always --name devopsik-page -p 80:80 lopihara/devopsik-page:latest
-                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web.pk web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp docker rm -f devopsik-page ||true
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp docker pull lopihara/devopsik-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp docker run -d -it --restart=always --name devopsik-page -p 80:80 lopihara/devopsik-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
                 '''
             }
 
