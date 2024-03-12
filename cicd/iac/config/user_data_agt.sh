@@ -42,6 +42,7 @@ chown agent:agent /home/agent/jenkins
 mkdir /home/agent/.ssh
 chmod 700 /home/agent/.ssh
 
+# use (ssh-keygen -b 4096 -t rsa) command for generating key pairs
 aws s3 cp s3://lopihara/ssh_keys/web4k /home/agent/.ssh/web4k
 aws s3 cp s3://lopihara/ssh_keys/agent4k.pub /home/agent/.ssh/agent4k.pub
 mv /home/agent/.ssh/agent4k.pub /home/agent/.ssh/authorized_keys
