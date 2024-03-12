@@ -28,8 +28,8 @@ usermod -a -G docker web
 mkdir -p /home/web/.ssh
 
 # add web pb_k
-aws s3 cp s3://lopihara/ssh_keys/web.pb /home/web/.ssh/web.pb
-mv /home/web/.ssh/web.pb /home/web/.ssh/authorized_keys
+aws s3 cp s3://lopihara/ssh_keys/web4k.pub /home/web/.ssh/web4k.pub
+mv /home/web/.ssh/web4k.pub /home/web/.ssh/authorized_keys
 
 # set owner for .ssh/
 chown -R web:web /home/web/.ssh
