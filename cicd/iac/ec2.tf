@@ -54,6 +54,10 @@ resource "aws_instance" "jenkins_agent" {
   tags = {
     Name = "jenkins_agent"
   }
+  depends_on = [
+    aws_s3_object.s3_key_web,
+    aws_s3_object.s3_key_agent_pub,
+  ]
 }
 
 output "agent_public_ip" {
@@ -85,6 +89,9 @@ resource "aws_instance" "web_server" {
   tags = {
     Name = "web_server"
   }
+depends_on = [
+    aws_s3_object.s3_key_web
+  ]
 }
 
 output "web_public_ip" {
