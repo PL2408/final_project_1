@@ -20,7 +20,8 @@ resource "aws_instance" "jenkins_server" {
     ignore_changes = [ami]
   }
   tags = {
-    Name = "jenkins_server"
+    Name    = "jenkins_server"
+    Project = "Devopsik"
   }
 }
 
@@ -52,7 +53,8 @@ resource "aws_instance" "jenkins_agent" {
     ignore_changes = [ami]
   }
   tags = {
-    Name = "jenkins_agent"
+    Name    = "jenkins_agent"
+    Project = "Devopsik"
   }
   depends_on = [
     aws_s3_object.s3_key_web,
@@ -87,7 +89,8 @@ resource "aws_instance" "web_server" {
   }
 
   tags = {
-    Name = "web_server"
+    Name    = "web_server"
+    Project = "Devopsik"
   }
   depends_on = [
     aws_s3_object.s3_key_web
