@@ -1,5 +1,5 @@
 resource "aws_security_group" "fp01_alb_sg" {
-  name        = "visitka_elb_sg"
+  name        = "devopsik_elb_sg"
   description = "HTTPS traffic"
   vpc_id      = aws_vpc.fp01_vpc.id
 
