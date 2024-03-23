@@ -23,6 +23,7 @@ resource "aws_security_group" "fp01_alb_sg" {
   }
 
   tags = {
-    Name = "fp01_alb_sg"
+    Name    = "fp01_alb_sg"
+    Project = "Devopsik"
   }
 }

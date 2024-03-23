@@ -89,7 +89,7 @@ resource "aws_instance" "web_server" {
   tags = {
     Name = "web_server"
   }
-depends_on = [
+  depends_on = [
     aws_s3_object.s3_key_web
   ]
 }
