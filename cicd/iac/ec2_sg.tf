@@ -9,7 +9,7 @@ resource "aws_security_group" "jenkins_server" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  #["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"] #["${chomp(data.http.myip.response_body)}/32"]
   }
   ingress {
     description     = "HTTP traffic from ALB"
@@ -43,7 +43,7 @@ resource "aws_security_group" "jenkins_agent" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  #["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"] #["${chomp(data.http.myip.response_body)}/32"]
   }
   ingress {
     description     = "SSH traffic to jenkins_server_sg"
@@ -76,7 +76,7 @@ resource "aws_security_group" "web_server_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  #["${chomp(data.http.myip.response_body)}/32"]
+    cidr_blocks = ["0.0.0.0/0"] #["${chomp(data.http.myip.response_body)}/32"]
   }
   ingress {
     description     = "SSH traffic from jenkins_agent_sg"
