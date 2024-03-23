@@ -18,6 +18,7 @@ yum install java git docker dos2unix -y
 # Update Route53 record with new public IP
 aws s3 cp s3://lopihara/config/update_route53.json /opt/
 aws s3 cp s3://lopihara/config/update_route53.sh /opt/
+dos2unix /opt/update_route53.sh
 chmod +x /opt/update_route53.sh
 sed -i 's/HOSTNAME/jenkins/g' /opt/update_route53.json
 /opt/update_route53.sh

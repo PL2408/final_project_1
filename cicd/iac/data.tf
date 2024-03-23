@@ -3,7 +3,7 @@ data "http" "myip" {
 }
 
 data "aws_route53_zone" "visitka_hz" {
-  name         = "lopihara.iplatinum.pro"
+  name         = "devopsik.iturbo.click"
   private_zone = false
 }
 

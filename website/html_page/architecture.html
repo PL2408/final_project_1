@@ -1,0 +1,52 @@
+<div class="container py-3">
+  <div class="card text-white bg-primary mb-3 mt-n3" style="max-width: 80rem;">
+    <h3 class="card-header">AWS Architecture</h3>
+    <div class="card-body">
+      <h5 class="card-title">Used Tools</h5>
+      <h6 class="card-subtitle text-muted">AWS | Terraform | Docker | Jenkins | Nginx</h6>
+    </div>
+    <ul>
+      <li class="list-group-item">
+        <img src="images/architecture.png" alt="architecture" class="float-start img-fluid imageViewBig"
+          style="width: 18rem;">
+      </li>
+    </ul>
+    <div class="card-body">
+      <p class="card-text">Architecture</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Using Terraform to describe infrastructure as code is a good practice and it helps in
+        automating the infrastructure
+        deployment process. Building the project on AWS platform is a provides various services and features that can
+        help
+        in building a scalable and secure infrastructure</li>
+      <li class="list-group-item">Using Docker to launch the site based on Nginx image is it provides a lightweight and
+        portable environment to run
+        the application. Additionally, using CloudFront for the static website is it helps in delivering the content
+        faster
+        to the end-users by caching the content on the edge locations</li>
+      <li class="list-group-item">Jenkins is a popular CI/CD tool and using it in the project is it helps in automating
+        the build, test and
+        deployment process</li>
+      <li class="list-group-item">Using Public Subnets to avoid additional costs for NAT Gateway is a good approach to
+        minimize the costs, however,
+        it's important to consider the security aspects while using Public Subnets</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Creates the bootstrap modal where the image will appear -->
+<div class="modal fade" id="modalImgageView" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-body text-center">
+      <img src="assets/images/nophoto.png" alt="Image Title" class="img-fluid" id="modalImgageViewIMG">
+    </div>
+  </div>
+</div>
+<script>
+  $(document).on("click", ".imageViewBig", function () {
+    let url = $(this).attr('src');
+    $('#modalImgageViewIMG').attr('src', url);
+    $('#modalImgageView').modal('toggle');
+  });
+</script>

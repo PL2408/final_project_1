@@ -1,0 +1,10 @@
+* text=lf
+
+*.tf text
+*.sh text
+*.html text
+*.css text
+Jenkinsfile_dp text
+Jenkinsfile_sp text
+*.md text
+Dockerfile text

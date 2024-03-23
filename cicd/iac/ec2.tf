@@ -2,7 +2,7 @@
 resource "aws_instance" "jenkins_server" {
   ami                         = data.aws_ami.amazon-linux-2.id
   instance_type               = "t3.micro"
-  key_name                    = "p_l"
+  key_name                    = "test_keys"
   subnet_id                   = aws_subnet.fp01_pub_sb01.id
   vpc_security_group_ids      = [aws_security_group.jenkins_server.id]
   user_data                   = file("config/user_data_jns.sh")
@@ -34,7 +34,7 @@ output "jenkins_public_ip" {
 resource "aws_instance" "jenkins_agent" {
   ami                         = data.aws_ami.amazon-linux-2.id
   instance_type               = "t3.micro"
-  key_name                    = "p_l"
+  key_name                    = "test_keys"
   subnet_id                   = aws_subnet.fp01_pub_sb01.id
   vpc_security_group_ids      = [aws_security_group.jenkins_agent.id]
   user_data                   = file("config/user_data_agt.sh")
@@ -54,6 +54,10 @@ resource "aws_instance" "jenkins_agent" {
   tags = {
     Name = "jenkins_agent"
   }
+  depends_on = [
+    aws_s3_object.s3_key_web,
+    aws_s3_object.s3_key_agent_pub,
+  ]
 }
 
 output "agent_public_ip" {
@@ -64,7 +68,7 @@ output "agent_public_ip" {
 resource "aws_instance" "web_server" {
   ami                         = data.aws_ami.amazon-linux-2.id
   instance_type               = "t3.micro"
-  key_name                    = "p_l"
+  key_name                    = "test_keys"
   subnet_id                   = aws_subnet.fp01_pub_sb01.id
   vpc_security_group_ids      = [aws_security_group.web_server_sg.id]
   user_data                   = file("config/user_data_web.sh")
@@ -85,6 +89,9 @@ resource "aws_instance" "web_server" {
   tags = {
     Name = "web_server"
   }
+depends_on = [
+    aws_s3_object.s3_key_web
+  ]
 }
 
 output "web_public_ip" {

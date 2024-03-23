@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "sp_bucket" {
-  bucket = "web2.lopihara"
+  bucket = "devopsik-page"
 
   tags = {
-    Name = "web2.lopihara"
+    Name = "devopsik-page"
   }
 }
 

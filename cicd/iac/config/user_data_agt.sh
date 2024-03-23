@@ -18,6 +18,7 @@ cat <(echo "$cronjob") | crontab -
 #############################################
 yum update -y
 yum install java git docker dos2unix -y
+dos2unix /opt/update_route53.sh
 
 systemctl enable docker.service
 service docker start
@@ -41,11 +42,12 @@ chown agent:agent /home/agent/jenkins
 mkdir /home/agent/.ssh
 chmod 700 /home/agent/.ssh
 
-aws s3 cp s3://lopihara/ssh_keys/web.pk /home/agent/.ssh/web.pk
-aws s3 cp s3://lopihara/ssh_keys/agent.pb /home/agent/.ssh/agent.pb
-mv /home/agent/.ssh/agent.pb /home/agent/.ssh/authorized_keys
+# use (ssh-keygen -b 4096 -t rsa) command for generating key pairs
+aws s3 cp s3://lopihara/ssh_keys/web4k /home/agent/.ssh/web4k
+aws s3 cp s3://lopihara/ssh_keys/agent4k.pub /home/agent/.ssh/agent4k.pub
+mv /home/agent/.ssh/agent4k.pub /home/agent/.ssh/authorized_keys
 
-chmod 400 /home/agent/.ssh/web.pk
+chmod 400 /home/agent/.ssh/web4k
 chmod 600 /home/agent/.ssh/authorized_keys
 
 chown -R agent:agent /home/agent/.ssh

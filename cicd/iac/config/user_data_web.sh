@@ -6,7 +6,9 @@ aws s3 cp s3://lopihara/config/update_route53.json /opt/
 aws s3 cp s3://lopihara/config/update_route53.sh /opt/
 chmod +x /opt/update_route53.sh
 sed -i 's/HOSTNAME/web/g' /opt/update_route53.json
-/opt/update_route53.sh
+
+yum install docker git htop dos2unix -y
+dos2unix /opt/update_route53.sh
 
 # Create crontab job to update record on restart
 cronjob="@reboot /opt/update_route53.sh"
@@ -15,7 +17,6 @@ cat <(echo "$cronjob") | crontab -
 yum update -y
 
 # installation docker
-yum install docker git htop dos2unix -y
 systemctl enable docker.service
 
 # create user web
@@ -26,9 +27,10 @@ usermod -a -G docker web
 
 mkdir -p /home/web/.ssh
 
+# use (ssh-keygen -b 4096 -t rsa) command for generating key pairs
 # add web pb_k
-aws s3 cp s3://lopihara/ssh_keys/web.pb /home/web/.ssh/web.pb
-mv /home/web/.ssh/web.pb /home/web/.ssh/authorized_keys
+aws s3 cp s3://lopihara/ssh_keys/web4k.pub /home/web/.ssh/web4k.pub
+mv /home/web/.ssh/web4k.pub /home/web/.ssh/authorized_keys
 
 # set owner for .ssh/
 chown -R web:web /home/web/.ssh
@@ -46,7 +48,7 @@ chmod 755 /home/web/html
 systemctl start docker
 
 # start nginx
-docker run -d -it --rm --name dynamic-page -p 80:80 lopihara/dynamic-page:latest
+docker run -d -it --rm --name devopsik-page -p 80:80 lopihara/devopsik-page:latest
 
 # custom PS1
 aws s3 cp s3://lopihara/config/web_server_ps1.sh /etc/ps1.sh

@@ -1,9 +1,9 @@
 # Final project 1
-[LOPIHARA.IPLATINUM.PRO](https://lopihara.iplatinum.pro)
+[DEVOPSIK.ITURBO.CLICK](https://lopihara.iplatinum.pro)
 
 This project is a result of my way in learning DevOps tools with practical implementation.
 
-Application is a static html Web page. Link: [lopihara.iplatinum.pro](https://lopihara.iplatinum.pro) 
+Application is a static html Web page. Link: [devopsik.iturbo.click](https://lopihara.iplatinum.pro) 
 It has two modes. Switching between modes is based on Route53 failover policy.
 * Web site which runs on EC2 instance in Docker container - primary endpoint
 * Static Web site located in S3 bucket - secondary endpoint

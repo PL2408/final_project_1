@@ -1,0 +1,77 @@
+def MJ_VERSION = "6"
+def TLG_URL = "https://api.telegram.org"
+def MSG_OK = "✅:%20Job%20D%20-%20Success"
+def MSG_FAIL = "❌:%20Job%20D%20-%20Failed"
+
+pipeline {
+    agent { label 'Node_1' }
+    stages {
+        stage('Code Validation') {
+            steps {
+                sh """
+                    cd website/html_page
+                    java -jar /opt/vnu/dist/vnu.jar index.html
+                """
+            }
+        }
+        stage('Build Project') {
+            steps {
+                sh """
+                    docker rmi -f \$(docker images |grep -v nginx |awk 'NR>1 {print \$3}'|uniq) ||true
+                    cd website/
+                    docker build -t lopihara/devopsik-page:latest -t lopihara/devopsik-page:${MJ_VERSION}.'${BUILD_NUMBER}' .
+                """
+            }
+        }
+        stage('Project Validation') {
+            steps {
+                sh """
+                    docker stop devopsik-page ||true
+                    docker run -d -it --rm --name devopsik-page -p 80:80 lopihara/devopsik-page:${MJ_VERSION}.'${BUILD_NUMBER}'
+                    sleep 5
+                    curl -v http://localhost/ |grep 'DevOps-ik'
+                    docker stop devopsik-page
+                """
+            }
+        }
+        stage('Publish Docker Image') {
+            steps {
+                withCredentials([string(credentialsId: 'docker_token', variable: 'DKR_TOKEN')]) {
+                    sh """
+                        docker login -u lopihara -p '${DKR_TOKEN}'
+                        docker push lopihara/devopsik-page:latest
+                        docker push lopihara/devopsik-page:${MJ_VERSION}.'${BUILD_NUMBER}'
+                    """
+                }
+            }
+
+        }
+        stage('Deploy to PROD') {
+            steps {
+                sh '''
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp docker rm -f devopsik-page ||true
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp docker pull lopihara/devopsik-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp docker run -d -it --restart=always --name devopsik-page -p 80:80 lopihara/devopsik-page:latest
+                    ssh -o StrictHostKeyChecking=no -i /home/agent/.ssh/web4k web@web.mp "docker rmi -f \$(docker images |grep -v latest |awk 'NR>1 {print \$3}'|uniq) ||true"
+                '''
+            }
+
+        }
+    }
+    post {
+        success {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
+                    sh """
+                        curl \''${TLG_URL}'/'bot${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_OK}'\'
+                    """
+                }
+        }
+        failure {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
+                    sh """
+                        curl \''${TLG_URL}'/'bot${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_FAIL}'\'
+                    """
+                }
+        }
+    }
+}

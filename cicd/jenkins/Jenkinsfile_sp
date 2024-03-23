@@ -1,0 +1,48 @@
+def TLG_URL = "https://api.telegram.org"
+def MSG_OK = "✅:%20Job%20S%20-%20Success"
+def MSG_FAIL = "❌:%20Job%20S%20-%20Failed"
+
+pipeline {
+    agent { label 'Node_1' }
+    stages {
+        stage('Code Validation') {
+            steps {
+                sh """
+                    cd website/html_page
+                    java -jar /opt/vnu/dist/vnu.jar index.html
+                """
+            }
+        }
+        stage('Static page markup') {
+            steps {
+                sh """
+                    cd website/html_page
+                    sed -i 's%<em><strong>D</strong></em>%<em><strong>S</strong></em>%g' index.html
+                """
+            }
+        }
+        stage('Publish page') {
+            steps {
+                sh """
+                    aws s3 sync website/html_page s3://devopsik-page/ --delete
+                """
+            }
+        }
+    }
+    post {
+        success {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
+                sh """
+                    curl \''${TLG_URL}'/'bot${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_OK}'\'
+                """
+            }
+        }
+        failure {
+            withCredentials([string(credentialsId: 'telegram_token', variable: 'TLG_TOKEN')]) {
+                sh """
+                    curl \''${TLG_URL}'/'bot${TLG_TOKEN}'/sendMessage?chat_id=-1001839127589&text='${MSG_FAIL}'\'
+                """
+           }
+        }
+    }
+}
